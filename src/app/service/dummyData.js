@@ -7,6 +7,22 @@ export  const productApi =createApi({
         // get all products
         getAllProducts : builder.query({
             query : () => '/products'
+        }),
+
+        getProductById : builder.query({
+            query : (id) => `/products/${id}`
+        }),
+
+        // adding
+        addProduct : builder.mutation({
+            query : (newProduct) => ({
+                url : '/products/add',
+                method : 'POST',
+                body : newProduct,
+                headers : {
+                    'Content-Type' : 'application/json'
+                }
+            })
         })
     })
 })
@@ -14,5 +30,7 @@ export  const productApi =createApi({
 // `use ${getAllProducts}Query`
 
 export const {
-    useGetAllProductsQuery
+    useGetAllProductsQuery,
+    useGetProductByIdQuery,
+    useAddProductMutation
 } =  productApi
